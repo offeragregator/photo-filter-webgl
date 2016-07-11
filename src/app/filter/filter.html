@@ -1,0 +1,64 @@
+<ion-view id="photo-filter">
+    <ion-nav-title>WebGL Filter Photo</ion-nav-title>
+    <ion-content scroll="false">
+        <img id="image" src="img/image.jpg" alt="">
+
+        <div ng-show="!vm.showFilter" class="slider-filters">
+            <div >
+                <ion-scroll direction="x" class="image-filter">
+                    <a ng-repeat="filter in vm.imageFilters" ng-click="vm.applyFilter(filter)">
+                        <p>{{ filter.name }}</p>
+                        <img id="{{filter.id}}" src="">
+                    </a>
+                </ion-scroll>
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-block bold ">Filter</button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block " ng-click="vm.showFilter=true">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="vm.showFilter" class="slider-filters">
+            <div ng-show="vm.showFilters" class="slider-filters">
+                <ion-scroll direction="x">
+                    <a ng-repeat="filter in vm.filters" ng-click="vm.selectFilter(filter)">
+                        <p>{{ filter.name }}</p>
+                        <i class="icon {{filter.icon}}"></i>
+                    </a>
+
+                    <a ng-click="vm.reset()">
+                        <p>Reset</p>
+                        <i class="icon ion-android-refresh"></i>
+                    </a>
+                </ion-scroll>
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-block " ng-click="vm.showFilter=false">Filter</button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block bold">Edit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="!vm.showFilters" class="slider-filters">
+                <p class="text-center">{{vm.filter.name}}</p>
+                <slider-filter filter="vm.filter"></slider-filter>
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-block " ng-click="vm.cancelFilter(vm.filter)">Cancel</button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block bold" ng-click="vm.showFilters = !vm.showFilters">Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-view>

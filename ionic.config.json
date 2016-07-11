@@ -1,0 +1,13 @@
+{
+  "name": "Photofilter",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*.js",
+    "www/**/*.html",
+    "!www/css/**/*",
+    "!www/lib/**/*"
+  ]
+}

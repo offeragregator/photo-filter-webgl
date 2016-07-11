@@ -1,0 +1,8 @@
+#!/bin/bash
+# Usage: prod.sh 'platform'
+# 
+echo "Minify Application"
+gulp build
+echo "Build Release "
+cordova build  --release --buildConfig build.json
+

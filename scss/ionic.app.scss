@@ -1,0 +1,49 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+*/
+// Include all of Ionic
+@import "variables";
+@import "../bower_components/ionic/scss/ionic";
+@import "../bower_components/simple-line-icons/scss/simple-line-icons";
+@import "animate";
+@import "socialbuttons";
+@import "colors";
+@import "background-animate";
+
+//  iOS bar gray
+.platform-ios {
+  .bar.bar-light {
+    background-color: #fafafa !important;
+    border-bottom: 1px solid #ddd;
+  }
+  .tab-nav.tabs {
+    border-top: 1px solid #ddd !important;
+  }
+}
+
+.connect {
+  display: block;
+  position: fixed;
+  top: 48px;
+  width: 100%;
+  height: 30px;
+  z-index: 9999;
+  left: 35%;
+
+  span {
+    padding: 0px 40px;
+    background-color: #fff;
+    color: $positive;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+}
+
+/* Do not remove the comments below. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
