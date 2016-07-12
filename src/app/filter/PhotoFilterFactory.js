@@ -2,7 +2,7 @@
     'use strict';
     angular.module('starter').factory('PhotoFilter', PhotoFilterFactory);
 
-    function PhotoFilterFactory() {
+    function PhotoFilterFactory($q, $timeout) {
 
         var image, texture;
         // Try Canvas
@@ -195,39 +195,51 @@
         ];
 
         function init(elementId) {
+            var defer = $q.defer();
             // convert the image to a texture
-            image = document.getElementById(elementId);
-            texture = canvas.texture(image);
-
-            // Generate Filters Thumb
-            imageFilters.map(function (imageThumb) {
-                var thumbFilter = document.getElementById(imageThumb.id);
-                if (thumbFilter) {
-                    var img = new Image();
-                    img.src = image.src;
-
-                    console.log(img);
-                    canvas2
-                        .draw(canvas2.texture(img))
-                        .brightnessContrast(imageThumb.filter.brightness, imageThumb.filter.contrast)
-                        .hueSaturation(imageThumb.filter.hue, imageThumb.filter.saturation)
-                        .vibrance(imageThumb.filter.vibrance)
-                        .denoise(imageThumb.filter.denoise * 100)
-                        .unsharpMask(imageThumb.filter.radius * 100, imageThumb.filter.strength)
-                        .noise(imageThumb.filter.noise)
-                        .sepia(imageThumb.filter.sepia)
-                        .vignette(imageThumb.filter.size, imageThumb.filter.amount)
-                        .update();
-                    thumbFilter.src = canvas2.toDataURL('image/png');
-                }
-
-            });
-
-            console.log(canvas);
+            image     = document.getElementById(elementId);
+            // convert the image to a texture
+            texture   = canvas.texture(image);
             // replace the image with the canvas
-            canvas.draw(texture).update();
-            console.log(canvas);
-            image.src = canvas.toDataURL('image/png');
+            canvas.draw(texture)
+                  //.brightnessContrast(imageFilter.brightness, imageFilter.contrast)
+                  //.hueSaturation(imageFilter.hue, imageFilter.saturation)
+                  //.vibrance(imageFilter.vibrance)
+                  //.denoise(imageFilter.denoise * 100)
+                  //.unsharpMask(imageFilter.radius * 100, imageFilter.strength)
+                  //.noise(imageFilter.noise)
+                  //.sepia(imageFilter.sepia)
+                  //.vignette(imageFilter.size, imageFilter.amount)
+                  //.matrixWarp(null, 1)
+                  .update();
+            image.src = canvas.toDataURL('image/jpeg', 0.8);
+
+            $timeout(function () {
+                // Generate Filters Thumb
+                imageFilters.map(function (imageThumb) {
+                    var thumbFilter = document.getElementById(imageThumb.id);
+                    if (thumbFilter) {
+                        var img = new Image();
+                        img.src = image.src;
+                        canvas2
+                            .draw(canvas2.texture(img))
+                            .brightnessContrast(imageThumb.filter.brightness, imageThumb.filter.contrast)
+                            .hueSaturation(imageThumb.filter.hue, imageThumb.filter.saturation)
+                            .vibrance(imageThumb.filter.vibrance)
+                            .denoise(imageThumb.filter.denoise * 100)
+                            .unsharpMask(imageThumb.filter.radius * 100, imageThumb.filter.strength)
+                            .noise(imageThumb.filter.noise)
+                            .sepia(imageThumb.filter.sepia)
+                            .vignette(imageThumb.filter.size, imageThumb.filter.amount)
+                            .update();
+                        thumbFilter.src = canvas2.toDataURL('image/jpeg', 0.7);
+                    }
+                });
+                defer.resolve();
+            }, 500);
+
+            return defer.promise;
+
         }
 
         function Filter(name, icon, func, init, update, imageFile) {
@@ -269,7 +281,7 @@
             imageFilter[Object.keys(values)[0]] = values[Object.keys(values)[0]];
 
             canvas
-                .draw(texture, 0, 0)
+                .draw(texture)
                 .brightnessContrast(imageFilter.brightness, imageFilter.contrast)
                 .hueSaturation(imageFilter.hue, imageFilter.saturation)
                 .vibrance(imageFilter.vibrance)
@@ -280,7 +292,7 @@
                 .vignette(imageFilter.size, imageFilter.amount)
                 .update();
 
-            image.src = canvas.toDataURL('image/png');
+            image.src = canvas.toDataURL('image/jpeg', 0.8);
         };
 
         var perspectiveNubs = [175, 156, 496, 55, 161, 279, 504, 330];
@@ -506,7 +518,11 @@
                 .vignette(imageFilter.size, imageFilter.amount)
                 .update();
 
-            image.src = canvas.toDataURL('image/png');
+            image.src = canvas.toDataURL('image/jpeg', 0.8);
+        }
+
+        function getImage() {
+            return canvas.toDataURL('image/jpeg', 0.8);
         }
 
 
@@ -516,6 +532,7 @@
             init        : init,
             reset       : reset,
             apply       : apply,
+            getImage    : getImage
         };
 
 

@@ -5,6 +5,7 @@
 
   img {
     max-width: 100%;
+    transform: rotateX(180deg);
   }
 
   .slider-filters {
@@ -17,8 +18,15 @@
     width: 100%;
     transition: all linear .5s;
 
+    p {
+      color: #777;
+    }
+
+
     img {
       width: 90px;
+      box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.3);
+      transform: rotateX(0deg);
     }
 
     &.ng-hide {
@@ -26,9 +34,41 @@
       bottom: -200px;
     }
 
-    .image-filter {
+    ion-scroll {
       display: block;
       height: 100px;
+      transition: all linear .5s;
+
+      &.ng-hide {
+        opacity: 0;
+        bottom: -200px;
+      }
+
+      a {
+        display: inline-block;
+        text-align: center;
+        width: 85px;
+        height: 90px;
+        color: #000;
+
+        button {
+          background-color: transparent !important;
+        }
+        img {
+          max-width: 70px;
+        }
+
+        i {
+          display: block;
+          margin: 0 auto;
+          font-size: 40px;
+          border: 1px solid #ccc;
+          border-radius: 50%;
+          padding: 15px;
+          width: 70px;
+          height: 70px;
+        }
+      }
     }
 
     .item {
@@ -38,25 +78,6 @@
     .row, .col {
       padding: 0;
       margin: 0;
-    }
-
-    a {
-      display: inline-block;
-      text-align: center;
-      width: 100px;
-      height: 100px;
-      color: #000;
-
-      i {
-        display: block;
-        margin: 0 auto;
-        font-size: 40px;
-        border: 1px solid #ccc;
-        border-radius: 50%;
-        padding: 15px;
-        width: 70px;
-        height: 70px;
-      }
     }
 
   }

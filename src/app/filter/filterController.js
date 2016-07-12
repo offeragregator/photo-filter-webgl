@@ -5,12 +5,6 @@
     function FilterController($scope, PhotoService, PhotoFilter) {
         var vm = this;
 
-        vm.open = function () {
-            PhotoService.open().then(function (image) {
-                console.log(image);
-            });
-        }
-
         $scope.$on('$ionicView.enter', function () {
             PhotoFilter.init('image');
         });

@@ -8,8 +8,8 @@
 
             .state('main', {
                 url         : '/',
-                templateUrl : 'app/filter/filter.html',
-                controller  : 'FilterCtrl',
+                templateUrl : 'app/filter/main.html',
+                controller  : 'MainCtrl',
                 controllerAs: 'vm'
             })
 
