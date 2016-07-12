@@ -34,14 +34,13 @@
             var defer = $q.defer();
 
             function openFilter(image64) {
-                //var templateFilter = '<ion-modal-view class="modal-capture"><ion-content scroll="false"><photo-filter image="form.photo"></photo-filter></ion-content></ion-modal-view>';
                 var scope  = $rootScope.$new(true);
                 tempImage  = image64;
                 scope.form = {
                     photo: image64
                 };
 
-                $ionicModal.fromTemplateUrl('app/filter/filter.html', {
+                $ionicModal.fromTemplateUrl('app/component/ion-photo/view/filter.modal.html', {
                     scope          : scope,
                     focusFirstInput: true
                 }).then(function (modal) {
@@ -77,8 +76,13 @@
                 scope.showFilters = true;
 
                 scope.selectFilter = function (filter) {
+                    console.log('filter', filter);
                     scope.filter      = filter;
                     scope.showFilters = false;
+                };
+
+                scope.doneFilter = function () {
+                    scope.showFilters = true;
                 };
 
                 scope.cancelFilter = function (filter) {
@@ -107,6 +111,12 @@
                     scope.modalFilter.remove();
                     defer.resolve(dataUrl);
                 };
+
+
+                // Cleanup the modal when we're done with it!
+                scope.$on('$destroy', function () {
+                    scope.modal.remove();
+                });
 
 
             }

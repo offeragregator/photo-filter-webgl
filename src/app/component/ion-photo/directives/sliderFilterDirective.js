@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('starter').directive('sliderFilter', sliderFilterDirective);
+    angular.module('ion-photo').directive('sliderFilter', sliderFilterDirective);
 
     function sliderFilterDirective() {
         return {
@@ -10,7 +10,7 @@
             scope      : {
                 filter: '='
             },
-            templateUrl: 'app/filter/slider-filter.html'
+            templateUrl: 'app/component/ion-photo/view/slider-filter.html'
         };
 
         function sliderFilterLink(scope, elem, attr) {

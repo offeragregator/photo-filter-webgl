@@ -468,8 +468,12 @@
             //]
         };
 
-        function apply(filters) {
-            imageFilter = filters;
+        function apply(resFilter) {
+
+            console.log('apply filter', resFilter);
+            console.log('filters Adjust', filters.Adjust);
+            imageFilter = resFilter;
+
             canvas
                 .draw(texture)
                 .brightnessContrast(imageFilter.brightness, imageFilter.contrast)

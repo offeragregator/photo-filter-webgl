@@ -13,14 +13,6 @@
                 controllerAs: 'vm'
             })
 
-            .state('photo', {
-                url         : '/photo',
-                abstract    : true,
-                templateUrl : 'app/filter/filter.html',
-                controller  : 'FilterCtrl',
-                controllerAs: 'vm'
-            })
-
 
         ;
 
